@@ -1,3 +1,5 @@
+import java.math.BigInteger;
+
 public class User {
     private int privateKey, g, p, publicKey, commonKey;
 
@@ -15,11 +17,17 @@ public class User {
 
     public void getChannelValues(int g, int p) {
         randomNumber randomNumber = new randomNumber();
-        privateKey = randomNumber.getRandomNumberInRange(1, 10);
+        privateKey = randomNumber.getRandomNumberInRange(2, 1_000_000);
         this.g = g;
         this.p = p;
 
-        publicKey = (int) Math.pow(g, privateKey) % p;
+        BigInteger bigPublicKey;
+        BigInteger bigG = new BigInteger(Integer.toString(g));
+        BigInteger bigPrivateKey = new BigInteger(Integer.toString(privateKey));
+        BigInteger bigP = new BigInteger(Integer.toString(p));
+        bigPublicKey = bigG.modPow(bigPrivateKey, bigP);
+
+        publicKey = bigPublicKey.intValue();
     }
 
     public int getPublicKey() {
@@ -27,6 +35,12 @@ public class User {
     }
 
     public void setCommonKey(int publicKeyUser2) {
-        commonKey = (int) Math.pow(publicKeyUser2, privateKey) % p;
+        BigInteger bigCommonKey;
+        BigInteger bigPublicKeyUser2 = new BigInteger(Integer.toString(publicKeyUser2));
+        BigInteger bigPrivateKey = new BigInteger(Integer.toString(privateKey));
+        BigInteger bigP = new BigInteger(Integer.toString(p));
+        bigCommonKey = bigPublicKeyUser2.modPow(bigPrivateKey, bigP);
+
+        commonKey = bigCommonKey.intValue();
     }
 }

@@ -1,4 +1,3 @@
-import java.awt.*;
 
 public class Channel {
     private int g = 0, p = 0;
@@ -17,7 +16,7 @@ public class Channel {
         randomNumber randomNumber = new randomNumber();
 
         p = randomNumber.getPrimeNumber(500);
-        g = randomNumber.getRandomNumberInRange(1, 10);
+        g = randomNumber.getRandomNumberInRange(2, 1_000_000);
 
         user1.getChannelValues(g, p);
         user2.getChannelValues(g, p);
