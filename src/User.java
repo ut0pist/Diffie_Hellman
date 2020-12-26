@@ -3,10 +3,6 @@ import java.math.BigInteger;
 public class User {
     private int privateKey, g, p, publicKey, commonKey;
 
-    User() {
-
-    }
-
     public int getPrivateKey() {
         return privateKey;
     }
